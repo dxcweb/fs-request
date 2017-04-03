@@ -1,6 +1,6 @@
 {
   "name": "fs-request",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "react request 支持web node react-native",
   "keywords": [
     "upload",
@@ -32,7 +32,8 @@
     "react-dom": "^15.4.2"
   },
   "dependencies": {
-    "bluebird": "^3.5.0"
+    "bluebird": "^3.5.0",
+    "fs-alert": "^0.1.1"
   },
   "files": [
     "assets",
