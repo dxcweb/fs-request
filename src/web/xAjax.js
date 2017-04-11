@@ -25,7 +25,8 @@ function promiseAjax(url, data, files) {
             },
             error: (status, text)=> {
                 const msg = (status || 500) + ',服务器无法正常提供信息';
-                reject(new ErrorPrompt(msg))
+                alert('', msg, [{text: "确定"}]);
+                resolve({ok: false, msg: null, code: 0});
             }
         });
     });
@@ -84,7 +85,6 @@ function request(url, data, files) {
             alert('', e.message, [{
                 text: "确定",
                 onClick: ()=> {
-                    console.log()
                     if ("function" == typeof e.callback) {
                         e.callback();
                     }
