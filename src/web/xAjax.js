@@ -5,11 +5,14 @@ import Promise from 'bluebird'
 import alert from 'fs-alert'
 import ajax from './ajax'
 
+
 function ErrorPrompt(message, callback) {
     this.prompt = true;
     this.message = message;
     this.callback = callback;
 }
+ErrorPrompt.prototype = Object.create(Error.prototype);
+ErrorPrompt.constructor = ErrorPrompt;
 function isErrorPrompt(e) {
     return e.prompt;
 }
@@ -24,9 +27,8 @@ function promiseAjax(url, data, files) {
                 resolve(res);
             },
             error: (status, text)=> {
-                const msg = (status || 500) + ',服务器无法正常提供信息';
-                alert('', msg, [{text: "确定"}]);
-                resolve({ok: false, msg: null, code: 0});
+                const msg = (status || 500) + ',服务器无法正常提供信息!';
+                reject(new ErrorPrompt(msg));
             }
         });
     });
