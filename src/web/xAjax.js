@@ -17,16 +17,16 @@ function isErrorPrompt(e) {
     return e.prompt;
 }
 function promiseAjax(url, data, files) {
-    return new Promise((resolve, reject)=> {
+    return new Promise((resolve, reject) => {
         ajax({
             method: 'post',
             url,
             data,
             files,
-            success: (res)=> {
+            success: (res) => {
                 resolve(res);
             },
-            error: (status, text)=> {
+            error: (status, text) => {
                 const msg = (status || 500) + ',服务器无法正常提供信息!';
                 reject(new ErrorPrompt(msg));
             }
@@ -53,7 +53,7 @@ function dataParse(res) {
         }
         if (res.errorcode == 1) {
             //1 没有登录
-            throw new ErrorPrompt('您的账户已失效，请重新登录！', ()=> {
+            throw new ErrorPrompt('您的账户已失效，请重新登录！', () => {
                 if ("function" == typeof window.loginAgain) {
                     window.loginAgain();
                 }
@@ -74,19 +74,20 @@ function dataParse(res) {
             throw new ErrorPrompt(msg);
         }
     }
-    const {result,errorcode,...other}=res;
+    const {result, errorcode, ...other} = res;
     return {ok: result, ...other, code: errorcode};
 }
-function request(url, data, files) {
-    const servicesPrefix = window.servicesPrefix || "";
-
+function request(url, data, files, servicesPrefix) {
+    if (servicesPrefix == null) {
+        servicesPrefix = window.servicesPrefix || "";
+    }
     return promiseAjax(servicesPrefix + url, {data: JSON.stringify(data)}, files)
         .then(jsonParse)
         .then(dataParse)
-        .catch(isErrorPrompt, (e)=> {
+        .catch(isErrorPrompt, (e) => {
             alert('', e.message, [{
                 text: "确定",
-                onClick: ()=> {
+                onClick: () => {
                     if ("function" == typeof e.callback) {
                         e.callback();
                     }
