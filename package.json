@@ -1,6 +1,6 @@
 {
   "name": "fs-request",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "react request 支持web node react-native",
   "keywords": [
     "upload",
@@ -22,17 +22,18 @@
   },
   "scripts": {
     "build": "rc-tools run build",
-    "start": "rc-tools run server",
-    "pub": "rc-tools run pub",
-    "up": "rc-tools run update-self"
+    "start": "rc-tools run server --babel-runtime",
+    "css": "rc-tools run css",
+    "pub": "rc-tools run publish",
+    "dist": "rc-tools run compile && rc-tools run dist"
   },
   "devDependencies": {
-    "rc-tools": "^5.11.4",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "mini-css-extract-plugin": "^0.9.0",
+    "rc-tools": "8.x",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
     "fs-alert": "^0.2.0"
   },
   "files": [

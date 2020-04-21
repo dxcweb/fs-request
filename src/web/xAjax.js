@@ -1,7 +1,6 @@
 /**
  * Created by guowei on 17/4/3.
  */
-import Promise from 'bluebird'
 import alert from 'fs-alert'
 import ajax from './ajax'
 
